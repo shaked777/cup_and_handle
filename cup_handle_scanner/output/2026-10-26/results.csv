@@ -1,0 +1,8 @@
+ticker,company,stage,score,close,pivot,pct_to_pivot,cup_depth_pct,cup_weeks,handle_depth_pct,handle_days,stop,target,volume_ratio,flags,a,b,c,h,e,last_bar
+COST,Costco,RIGHT_RIM,65.3,1005.16,1021.45,-1.59,19.3,21.8,,,953.78,1233.11,,rim_unconfirmed,2026-05-19,2026-09-25,2026-10-23,,,2026-10-26
+LIN,Linde plc,RIGHT_RIM,61.0,507.56,512.49,-0.96,16.9,15.4,,,489.11,604.7,,rim_unconfirmed,2026-07-07,2026-09-18,2026-10-23,,,2026-10-26
+WMT,Walmart,RIGHT_RIM,60.9,120.29,122.4,-1.72,24.2,21.8,,,112.21,155.09,,rim_unconfirmed,2026-05-19,2026-08-21,2026-10-23,,,2026-10-26
+PAYX,Paychex,RIGHT_RIM,58.2,115.7,118.27,-2.17,23.4,7.4,,,103.79,147.94,,rim_unconfirmed,2026-09-01,2026-09-29,2026-10-23,,,2026-10-26
+ADSK,Autodesk,RIGHT_RIM,57.9,249.45,256.17,-2.62,26.7,7.8,,,228.59,328.71,,rim_unconfirmed,2026-08-27,2026-09-29,2026-10-22,,,2026-10-26
+CTAS,Cintas,RIGHT_RIM,54.0,225.93,226.69,-0.34,12.6,12.4,,,204.9,254.2,,rim_unconfirmed,2026-07-29,2026-09-24,2026-10-26,,,2026-10-26
+TXN,Texas Instruments,CUP_FORMING,56.0,298.12,332.33,-10.29,25.3,17.6,,,272.01,416.53,,,2026-06-22,2026-09-03,,,,2026-10-26

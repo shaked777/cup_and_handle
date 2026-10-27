@@ -1,0 +1,8 @@
+# Overrides only; deep-merged over config.yaml.
+# Loosened for long weekly-chart bases such as EID Parry 2022-2024.
+cup:
+  max_days: 400
+handle:
+  max_days: 90
+  max_depth_pct: 22
+  min_position_in_cup: 0.3

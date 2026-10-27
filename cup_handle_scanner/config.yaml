@@ -1,0 +1,96 @@
+# Cup-and-handle scanner configuration.
+# Every threshold the code uses lives here. Keys ending in _pct are percents (30 means 30%).
+# A file passed with --config is deep-merged over this one, so it only needs the keys it changes.
+
+universe:
+  # The components table moved off the Nasdaq-100 article to this list page (checked 2026-10-27).
+  url: https://en.wikipedia.org/wiki/List_of_NASDAQ-100_companies
+  fallback_urls:              # tried in order if the main URL has no usable table
+    - https://en.wikipedia.org/wiki/Nasdaq-100
+  user_agent: "cup-handle-scanner/1.0 (personal research script; python-requests)"
+  request_timeout_sec: 30
+  saved_file: data/universe.csv
+  min_count: 95
+  max_count: 105
+  benchmark: QQQ
+
+data:
+  history_years: 3
+  batch_size: 20
+  pause_between_batches_sec: 2
+  max_retries: 4
+  backoff_base_sec: 10
+  request_timeout_sec: 30
+  cache_dir: data/cache
+  cache_max_age_hours: 12
+  min_bars: 250
+  session_timezone: America/New_York
+  session_close_time: "16:15"   # a bar dated today is dropped before this time
+
+pivots:
+  swing_window: 5             # bars on each side
+
+prior_uptrend:
+  lookback_days: 189          # about 9 months before the left rim
+  min_rise_pct: 30            # textbook value; large caps may need about 20
+
+cup:
+  min_days: 30                # left rim to right rim, about 6 weeks
+  max_days: 325               # about 65 weeks
+  min_depth_pct: 12
+  max_depth_pct: 35
+  rim_min_ratio: 0.90
+  rim_max_ratio: 1.05
+  left_rim_dominance_days: 60
+  bottom_position_min: 0.15
+  bottom_position_max: 0.85
+  u_bottom_zone: 0.35
+  u_min_share_in_zone: 0.40
+  forming_min_recovery: 0.5
+
+handle:
+  min_days: 5
+  max_days: 30
+  max_days_vs_cup: 0.5
+  min_depth_pct: 2
+  max_depth_pct: 12
+  min_position_in_cup: 0.5    # handle low stays in the upper half of the cup
+
+breakout:
+  near_pivot_pct: 5
+  volume_avg_days: 50
+  volume_ratio_min: 1.4
+  max_age_days: 10
+  extended_pct: 5
+
+levels:
+  stop_lookback_days: 10
+
+targets:
+  method: absolute            # "percent" projects the cup's % rise, as on the EID Parry chart
+
+scoring:
+  weights: {u_shape: 25, symmetry: 10, depth: 10, handle: 20, volume: 15, trend: 10, rel_strength: 10}
+  u_shape_range: [0.35, 0.55]
+  symmetry_tolerance: 0.10
+  depth_sweet_spot_pct: [15, 30]
+  handle_sweet_spot_pct: [3, 10]
+  handle_upper_zone: 0.3333   # "upper third": handle low within this top fraction of the cup
+  volume_dryup_range: [0.8, 1.2]
+  sma_fast_days: 50           # trend component and QQQ context
+  sma_slow_days: 200
+  rs_lookback_days: 126
+  rs_min_universe: 20
+  no_data_value: 0.5          # component value when it cannot be measured yet (no handle, forming)
+
+report:
+  output_dir: output
+  chart_padding_days: 60
+  near_misses: 10
+  console_top: 10
+  explain_top: 20
+  run_timezone: Asia/Jerusalem
+  chart_width_px: 1600
+  chart_height_px: 900
+  chart_dpi: 100
+  chart_font_size: 15

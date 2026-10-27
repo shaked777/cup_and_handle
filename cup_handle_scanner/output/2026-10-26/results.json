@@ -1,0 +1,1184 @@
+{
+  "last_session": "2026-10-26",
+  "run_time": "2026-10-27T19:34:45.971829+02:00",
+  "as_of": null,
+  "config": "config.yaml",
+  "scanned": 99,
+  "requested": 101,
+  "market": {
+    "ticker": "QQQ",
+    "date": "2026-10-26",
+    "close": 712.2000122070312,
+    "sma_fast": 725.0779858398438,
+    "sma_slow": 676.5675271606445,
+    "fast_days": 50,
+    "slow_days": 200,
+    "above_fast": "False",
+    "above_slow": "True"
+  },
+  "results": [
+    {
+      "ticker": "COST",
+      "company": "Costco",
+      "stage": "RIGHT_RIM",
+      "score": 65.3,
+      "close": 1005.16,
+      "pivot": 1021.45,
+      "pct_to_pivot": -1.59,
+      "cup_depth_pct": 19.3,
+      "cup_weeks": 21.8,
+      "handle_depth_pct": null,
+      "handle_days": null,
+      "stop": 953.78,
+      "target": 1233.11,
+      "volume_ratio": null,
+      "flags": "rim_unconfirmed",
+      "a": "2026-05-19",
+      "b": "2026-09-25",
+      "c": "2026-10-23",
+      "h": "",
+      "e": "",
+      "last_bar": "2026-10-26",
+      "chart": "charts/COST.png",
+      "rules": [
+        {
+          "name": "left_rim_dominance",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "high[a] 1094.76 vs prior max 1078.12",
+          "value": 1.015437669460234,
+          "threshold": "highest high of prior 60 bars"
+        },
+        {
+          "name": "prior_uptrend",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "30.3%",
+          "value": 30.274065114072002,
+          "threshold": ">= 30% over 189 bars before a"
+        },
+        {
+          "name": "cup_length",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "109 bars (c - a)",
+          "value": 109.0,
+          "threshold": "30 bars .. 325 bars"
+        },
+        {
+          "name": "cup_depth",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "19.3%",
+          "value": 19.333881774299584,
+          "threshold": "12% .. 35%"
+        },
+        {
+          "name": "rim_ratio",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.933 (high[c]/high[a])",
+          "value": 0.9330360063894854,
+          "threshold": "0.9 .. 1.05"
+        },
+        {
+          "name": "no_interior_peak",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "interior max 1088.01 vs rims 1094.76",
+          "value": 0.9938349090490738,
+          "threshold": "<= max(high[a], high[c])"
+        },
+        {
+          "name": "bottom_position",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.817 ((b-a)/(c-a))",
+          "value": 0.8165137614678899,
+          "threshold": "0.15 .. 0.85"
+        },
+        {
+          "name": "u_shape",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.682 of closes in bottom 35% of depth",
+          "value": 0.6818181818181818,
+          "threshold": ">= 0.4"
+        },
+        {
+          "name": "handle_depth_min",
+          "group": "handle",
+          "status": "PASS",
+          "required": false,
+          "measured": "2.2%",
+          "value": 2.1900234813109454,
+          "threshold": ">= 2%"
+        },
+        {
+          "name": "handle_depth_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "2.2%",
+          "value": 2.1900234813109454,
+          "threshold": "<= 12%"
+        },
+        {
+          "name": "handle_position",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.548 of cup depth above low[b]",
+          "value": 0.5479557480499985,
+          "threshold": ">= 0.5"
+        },
+        {
+          "name": "handle_length_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "1 bars",
+          "value": 1.0,
+          "threshold": "<= 30 bars (min of 30, 0.5 x cup)"
+        },
+        {
+          "name": "handle_length_min",
+          "group": "handle",
+          "status": "FAIL",
+          "required": false,
+          "measured": "1 bars",
+          "value": 1.0,
+          "threshold": ">= 5 bars"
+        }
+      ],
+      "components": {
+        "u_shape": 1.0,
+        "symmetry": 0.30688513177878707,
+        "depth": 1.0,
+        "handle": 0.5,
+        "volume": 0.5,
+        "trend": 0.5,
+        "rel_strength": 0.46938775510204084
+      }
+    },
+    {
+      "ticker": "LIN",
+      "company": "Linde plc",
+      "stage": "RIGHT_RIM",
+      "score": 61.0,
+      "close": 507.56,
+      "pivot": 512.49,
+      "pct_to_pivot": -0.96,
+      "cup_depth_pct": 16.9,
+      "cup_weeks": 15.4,
+      "handle_depth_pct": null,
+      "handle_days": null,
+      "stop": 489.11,
+      "target": 604.7,
+      "volume_ratio": null,
+      "flags": "rim_unconfirmed",
+      "a": "2026-07-07",
+      "b": "2026-09-18",
+      "c": "2026-10-23",
+      "h": "",
+      "e": "",
+      "last_bar": "2026-10-26",
+      "chart": "charts/LIN.png",
+      "rules": [
+        {
+          "name": "left_rim_dominance",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "high[a] 546.40 vs prior max 545.42",
+          "value": 1.0017909151971562,
+          "threshold": "highest high of prior 60 bars"
+        },
+        {
+          "name": "prior_uptrend",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "42.3%",
+          "value": 42.29221142428437,
+          "threshold": ">= 30% over 189 bars before a"
+        },
+        {
+          "name": "cup_length",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "77 bars (c - a)",
+          "value": 77.0,
+          "threshold": "30 bars .. 325 bars"
+        },
+        {
+          "name": "cup_depth",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "16.9%",
+          "value": 16.876009625738288,
+          "threshold": "12% .. 35%"
+        },
+        {
+          "name": "rim_ratio",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.938 (high[c]/high[a])",
+          "value": 0.9379381489279566,
+          "threshold": "0.9 .. 1.05"
+        },
+        {
+          "name": "no_interior_peak",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "interior max 535.29 vs rims 546.40",
+          "value": 0.9796606754119501,
+          "threshold": "<= max(high[a], high[c])"
+        },
+        {
+          "name": "bottom_position",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.675 ((b-a)/(c-a))",
+          "value": 0.6753246753246753,
+          "threshold": "0.15 .. 0.85"
+        },
+        {
+          "name": "u_shape",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.513 of closes in bottom 35% of depth",
+          "value": 0.5128205128205128,
+          "threshold": ">= 0.4"
+        },
+        {
+          "name": "handle_depth_min",
+          "group": "handle",
+          "status": "FAIL",
+          "required": false,
+          "measured": "1.0%",
+          "value": 1.0458712274772897,
+          "threshold": ">= 2%"
+        },
+        {
+          "name": "handle_depth_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "1.0%",
+          "value": 1.0458712274772897,
+          "threshold": "<= 12%"
+        },
+        {
+          "name": "handle_position",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.574 of cup depth above low[b]",
+          "value": 0.5741204354754581,
+          "threshold": ">= 0.5"
+        },
+        {
+          "name": "handle_length_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "1 bars",
+          "value": 1.0,
+          "threshold": "<= 30 bars (min of 30, 0.5 x cup)"
+        },
+        {
+          "name": "handle_length_min",
+          "group": "handle",
+          "status": "FAIL",
+          "required": false,
+          "measured": "1 bars",
+          "value": 1.0,
+          "threshold": ">= 5 bars"
+        }
+      ],
+      "components": {
+        "u_shape": 0.8141025641025638,
+        "symmetry": 0.35928728540781063,
+        "depth": 1.0,
+        "handle": 0.5,
+        "volume": 0.5,
+        "trend": 0.5,
+        "rel_strength": 0.45918367346938777
+      }
+    },
+    {
+      "ticker": "WMT",
+      "company": "Walmart",
+      "stage": "RIGHT_RIM",
+      "score": 60.9,
+      "close": 120.29,
+      "pivot": 122.4,
+      "pct_to_pivot": -1.72,
+      "cup_depth_pct": 24.2,
+      "cup_weeks": 21.8,
+      "handle_depth_pct": null,
+      "handle_days": null,
+      "stop": 112.21,
+      "target": 155.09,
+      "volume_ratio": null,
+      "flags": "rim_unconfirmed",
+      "a": "2026-05-19",
+      "b": "2026-08-21",
+      "c": "2026-10-23",
+      "h": "",
+      "e": "",
+      "last_bar": "2026-10-26",
+      "chart": "charts/WMT.png",
+      "rules": [
+        {
+          "name": "left_rim_dominance",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "high[a] 134.84 vs prior max 133.63",
+          "value": 1.0090332047954442,
+          "threshold": "highest high of prior 60 bars"
+        },
+        {
+          "name": "prior_uptrend",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "42.5%",
+          "value": 42.49891450579288,
+          "threshold": ">= 30% over 189 bars before a"
+        },
+        {
+          "name": "cup_length",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "109 bars (c - a)",
+          "value": 109.0,
+          "threshold": "30 bars .. 325 bars"
+        },
+        {
+          "name": "cup_depth",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "24.2%",
+          "value": 24.241973638659424,
+          "threshold": "12% .. 35%"
+        },
+        {
+          "name": "rim_ratio",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.908 (high[c]/high[a])",
+          "value": 0.9077613708969425,
+          "threshold": "0.9 .. 1.05"
+        },
+        {
+          "name": "no_interior_peak",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "interior max 133.33 vs rims 134.84",
+          "value": 0.9888279442757834,
+          "threshold": "<= max(high[a], high[c])"
+        },
+        {
+          "name": "bottom_position",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.596 ((b-a)/(c-a))",
+          "value": 0.5963302752293578,
+          "threshold": "0.15 .. 0.85"
+        },
+        {
+          "name": "u_shape",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.582 of closes in bottom 35% of depth",
+          "value": 0.5818181818181818,
+          "threshold": ">= 0.4"
+        },
+        {
+          "name": "handle_depth_min",
+          "group": "handle",
+          "status": "PASS",
+          "required": false,
+          "measured": "2.3%",
+          "value": 2.3202646502293525,
+          "threshold": ">= 2%"
+        },
+        {
+          "name": "handle_depth_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "2.3%",
+          "value": 2.3202646502293525,
+          "threshold": "<= 12%"
+        },
+        {
+          "name": "handle_position",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.533 of cup depth above low[b]",
+          "value": 0.5326242945841183,
+          "threshold": ">= 0.5"
+        },
+        {
+          "name": "handle_length_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "1 bars",
+          "value": 1.0,
+          "threshold": "<= 30 bars (min of 30, 0.5 x cup)"
+        },
+        {
+          "name": "handle_length_min",
+          "group": "handle",
+          "status": "FAIL",
+          "required": false,
+          "measured": "1 bars",
+          "value": 1.0,
+          "threshold": ">= 5 bars"
+        }
+      ],
+      "components": {
+        "u_shape": 1.0,
+        "symmetry": 0.03226257697022605,
+        "depth": 1.0,
+        "handle": 0.5,
+        "volume": 0.5,
+        "trend": 0.5,
+        "rel_strength": 0.30612244897959184
+      }
+    },
+    {
+      "ticker": "PAYX",
+      "company": "Paychex",
+      "stage": "RIGHT_RIM",
+      "score": 58.2,
+      "close": 115.7,
+      "pivot": 118.27,
+      "pct_to_pivot": -2.17,
+      "cup_depth_pct": 23.4,
+      "cup_weeks": 7.4,
+      "handle_depth_pct": null,
+      "handle_days": null,
+      "stop": 103.79,
+      "target": 147.94,
+      "volume_ratio": null,
+      "flags": "rim_unconfirmed",
+      "a": "2026-09-01",
+      "b": "2026-09-29",
+      "c": "2026-10-23",
+      "h": "",
+      "e": "",
+      "last_bar": "2026-10-26",
+      "chart": "charts/PAYX.png",
+      "rules": [
+        {
+          "name": "left_rim_dominance",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "high[a] 126.69 vs prior max 126.63",
+          "value": 1.0004690264719995,
+          "threshold": "highest high of prior 60 bars"
+        },
+        {
+          "name": "prior_uptrend",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "53.3%",
+          "value": 53.27767805384358,
+          "threshold": ">= 30% over 189 bars before a"
+        },
+        {
+          "name": "cup_length",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "37 bars (c - a)",
+          "value": 37.0,
+          "threshold": "30 bars .. 325 bars"
+        },
+        {
+          "name": "cup_depth",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "23.4%",
+          "value": 23.425537897159224,
+          "threshold": "12% .. 35%"
+        },
+        {
+          "name": "rim_ratio",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.934 (high[c]/high[a])",
+          "value": 0.933505248560418,
+          "threshold": "0.9 .. 1.05"
+        },
+        {
+          "name": "no_interior_peak",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "interior max 125.18 vs rims 126.69",
+          "value": 0.9880449589007007,
+          "threshold": "<= max(high[a], high[c])"
+        },
+        {
+          "name": "bottom_position",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.514 ((b-a)/(c-a))",
+          "value": 0.5135135135135135,
+          "threshold": "0.15 .. 0.85"
+        },
+        {
+          "name": "u_shape",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.421 of closes in bottom 35% of depth",
+          "value": 0.42105263157894735,
+          "threshold": ">= 0.4"
+        },
+        {
+          "name": "handle_depth_min",
+          "group": "handle",
+          "status": "PASS",
+          "required": false,
+          "measured": "3.2%",
+          "value": 3.1586397247628093,
+          "threshold": ">= 2%"
+        },
+        {
+          "name": "handle_depth_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "3.2%",
+          "value": 3.1586397247628093,
+          "threshold": "<= 12%"
+        },
+        {
+          "name": "handle_position",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.590 of cup depth above low[b]",
+          "value": 0.5902727208454132,
+          "threshold": ">= 0.5"
+        },
+        {
+          "name": "handle_length_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "1 bars",
+          "value": 1.0,
+          "threshold": "<= 18 bars (min of 30, 0.5 x cup)"
+        },
+        {
+          "name": "handle_length_min",
+          "group": "handle",
+          "status": "FAIL",
+          "required": false,
+          "measured": "1 bars",
+          "value": 1.0,
+          "threshold": ">= 5 bars"
+        }
+      ],
+      "components": {
+        "u_shape": 0.3552631578947367,
+        "symmetry": 0.31191306437415534,
+        "depth": 1.0,
+        "handle": 0.5,
+        "volume": 0.5,
+        "trend": 1.0,
+        "rel_strength": 0.8673469387755102
+      }
+    },
+    {
+      "ticker": "ADSK",
+      "company": "Autodesk",
+      "stage": "RIGHT_RIM",
+      "score": 57.9,
+      "close": 249.45,
+      "pivot": 256.17,
+      "pct_to_pivot": -2.62,
+      "cup_depth_pct": 26.7,
+      "cup_weeks": 7.8,
+      "handle_depth_pct": null,
+      "handle_days": null,
+      "stop": 228.59,
+      "target": 328.71,
+      "volume_ratio": null,
+      "flags": "rim_unconfirmed",
+      "a": "2026-08-27",
+      "b": "2026-09-29",
+      "c": "2026-10-22",
+      "h": "",
+      "e": "",
+      "last_bar": "2026-10-26",
+      "chart": "charts/ADSK.png",
+      "rules": [
+        {
+          "name": "left_rim_dominance",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "high[a] 271.72 vs prior max 260.74",
+          "value": 1.0421109588002146,
+          "threshold": "highest high of prior 60 bars"
+        },
+        {
+          "name": "prior_uptrend",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "46.5%",
+          "value": 46.479785024637806,
+          "threshold": ">= 30% over 189 bars before a"
+        },
+        {
+          "name": "cup_length",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "39 bars (c - a)",
+          "value": 39.0,
+          "threshold": "30 bars .. 325 bars"
+        },
+        {
+          "name": "cup_depth",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "26.7%",
+          "value": 26.69660246541867,
+          "threshold": "12% .. 35%"
+        },
+        {
+          "name": "rim_ratio",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.943 (high[c]/high[a])",
+          "value": 0.9427720163289034,
+          "threshold": "0.9 .. 1.05"
+        },
+        {
+          "name": "no_interior_peak",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "interior max 267.00 vs rims 271.72",
+          "value": 0.9826291726796021,
+          "threshold": "<= max(high[a], high[c])"
+        },
+        {
+          "name": "bottom_position",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.564 ((b-a)/(c-a))",
+          "value": 0.5641025641025641,
+          "threshold": "0.15 .. 0.85"
+        },
+        {
+          "name": "u_shape",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.475 of closes in bottom 35% of depth",
+          "value": 0.475,
+          "threshold": ">= 0.4"
+        },
+        {
+          "name": "handle_depth_min",
+          "group": "handle",
+          "status": "PASS",
+          "required": false,
+          "measured": "3.8%",
+          "value": 3.7670330832830703,
+          "threshold": ">= 2%"
+        },
+        {
+          "name": "handle_depth_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "3.8%",
+          "value": 3.7670330832830703,
+          "threshold": "<= 12%"
+        },
+        {
+          "name": "handle_position",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.653 of cup depth above low[b]",
+          "value": 0.6526055420487499,
+          "threshold": ">= 0.5"
+        },
+        {
+          "name": "handle_length_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "2 bars",
+          "value": 2.0,
+          "threshold": "<= 20 bars (min of 30, 0.5 x cup)"
+        },
+        {
+          "name": "handle_length_min",
+          "group": "handle",
+          "status": "FAIL",
+          "required": false,
+          "measured": "2 bars",
+          "value": 2.0,
+          "threshold": ">= 5 bars"
+        }
+      ],
+      "components": {
+        "u_shape": 0.6249999999999998,
+        "symmetry": 0.4106921018929721,
+        "depth": 1.0,
+        "handle": 0.5,
+        "volume": 0.5,
+        "trend": 0.5,
+        "rel_strength": 0.5714285714285714
+      }
+    },
+    {
+      "ticker": "CTAS",
+      "company": "Cintas",
+      "stage": "RIGHT_RIM",
+      "score": 54.0,
+      "close": 225.93,
+      "pivot": 226.69,
+      "pct_to_pivot": -0.34,
+      "cup_depth_pct": 12.6,
+      "cup_weeks": 12.4,
+      "handle_depth_pct": null,
+      "handle_days": null,
+      "stop": 204.9,
+      "target": 254.2,
+      "volume_ratio": null,
+      "flags": "rim_unconfirmed",
+      "a": "2026-07-29",
+      "b": "2026-09-24",
+      "c": "2026-10-26",
+      "h": "",
+      "e": "",
+      "last_bar": "2026-10-26",
+      "chart": "charts/CTAS.png",
+      "rules": [
+        {
+          "name": "left_rim_dominance",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "high[a] 218.60 vs prior max 218.07",
+          "value": 1.0024240545727638,
+          "threshold": "highest high of prior 60 bars"
+        },
+        {
+          "name": "prior_uptrend",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "36.4%",
+          "value": 36.36505137457735,
+          "threshold": ">= 30% over 189 bars before a"
+        },
+        {
+          "name": "cup_length",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "62 bars (c - a)",
+          "value": 62.0,
+          "threshold": "30 bars .. 325 bars"
+        },
+        {
+          "name": "cup_depth",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "12.6%",
+          "value": 12.585486144899777,
+          "threshold": "12% .. 35%"
+        },
+        {
+          "name": "rim_ratio",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "1.037 (high[c]/high[a])",
+          "value": 1.0369981024117985,
+          "threshold": "0.9 .. 1.05"
+        },
+        {
+          "name": "no_interior_peak",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "interior max 225.79 vs rims 226.69",
+          "value": 0.9960297801156622,
+          "threshold": "<= max(high[a], high[c])"
+        },
+        {
+          "name": "bottom_position",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.645 ((b-a)/(c-a))",
+          "value": 0.6451612903225806,
+          "threshold": "0.15 .. 0.85"
+        },
+        {
+          "name": "u_shape",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.429 of closes in bottom 35% of depth",
+          "value": 0.42857142857142855,
+          "threshold": ">= 0.4"
+        },
+        {
+          "name": "handle_depth_min",
+          "group": "handle",
+          "status": "FAIL",
+          "required": false,
+          "measured": "no handle bars",
+          "value": null,
+          "threshold": ">= 2%"
+        },
+        {
+          "name": "handle_depth_max",
+          "group": "handle",
+          "status": "n/a",
+          "required": true,
+          "measured": "no handle bars",
+          "value": null,
+          "threshold": "<= 12%"
+        },
+        {
+          "name": "handle_position",
+          "group": "handle",
+          "status": "n/a",
+          "required": true,
+          "measured": "no handle bars",
+          "value": null,
+          "threshold": ">= 0.5"
+        },
+        {
+          "name": "handle_length_max",
+          "group": "handle",
+          "status": "PASS",
+          "required": true,
+          "measured": "0 bars",
+          "value": 0.0,
+          "threshold": "<= 30 bars (min of 30, 0.5 x cup)"
+        },
+        {
+          "name": "handle_length_min",
+          "group": "handle",
+          "status": "FAIL",
+          "required": false,
+          "measured": "0 bars",
+          "value": 0.0,
+          "threshold": ">= 5 bars"
+        }
+      ],
+      "components": {
+        "u_shape": 0.39285714285714274,
+        "symmetry": 0.6366990063683124,
+        "depth": 0.19516204829992567,
+        "handle": 0.5,
+        "volume": 0.5,
+        "trend": 1.0,
+        "rel_strength": 0.8367346938775511
+      }
+    },
+    {
+      "ticker": "TXN",
+      "company": "Texas Instruments",
+      "stage": "CUP_FORMING",
+      "score": 56.0,
+      "close": 298.12,
+      "pivot": 332.33,
+      "pct_to_pivot": -10.29,
+      "cup_depth_pct": 25.3,
+      "cup_weeks": 17.6,
+      "handle_depth_pct": null,
+      "handle_days": null,
+      "stop": 272.01,
+      "target": 416.53,
+      "volume_ratio": null,
+      "flags": "",
+      "a": "2026-06-22",
+      "b": "2026-09-03",
+      "c": "",
+      "h": "",
+      "e": "",
+      "last_bar": "2026-10-26",
+      "chart": "charts/TXN.png",
+      "rules": [
+        {
+          "name": "left_rim_dominance",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "high[a] 332.33 vs prior max 329.82",
+          "value": 1.0076015875346753,
+          "threshold": "highest high of prior 60 bars"
+        },
+        {
+          "name": "prior_uptrend",
+          "group": "left_rim",
+          "status": "PASS",
+          "required": true,
+          "measured": "121.3%",
+          "value": 121.25229851433753,
+          "threshold": ">= 30% over 189 bars before a"
+        },
+        {
+          "name": "forming_bottom_confirmed",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "bottom 36 bars before T",
+          "value": 36.0,
+          "threshold": ">= 5 bars before T"
+        },
+        {
+          "name": "forming_no_higher_high",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "max high after a 314.98 vs high[a] 332.33",
+          "value": 0.9477891279996773,
+          "threshold": "<= high[a]"
+        },
+        {
+          "name": "cup_length",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "88 bars (T - a)",
+          "value": 88.0,
+          "threshold": "30 bars .. 325 bars"
+        },
+        {
+          "name": "cup_depth",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "25.3%",
+          "value": 25.335914098281688,
+          "threshold": "12% .. 35%"
+        },
+        {
+          "name": "forming_recovery",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.594 of depth recovered",
+          "value": 0.5937162591555644,
+          "threshold": ">= 0.5"
+        },
+        {
+          "name": "forming_below_rim",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "close 0.897 x high[a]",
+          "value": 0.8970643004243684,
+          "threshold": "< 0.9 x high[a]"
+        },
+        {
+          "name": "forming_no_right_rim",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "max high since b 0.900 x high[a]",
+          "value": 0.8995618809699077,
+          "threshold": "< 0.9 x high[a]"
+        },
+        {
+          "name": "u_shape",
+          "group": "cup",
+          "status": "PASS",
+          "required": true,
+          "measured": "0.404 of closes in bottom 35% of depth",
+          "value": 0.4044943820224719,
+          "threshold": ">= 0.4"
+        }
+      ],
+      "components": {
+        "u_shape": 0.2724719101123595,
+        "symmetry": 0.5,
+        "depth": 1.0,
+        "handle": 0.5,
+        "volume": 0.5,
+        "trend": 1.0,
+        "rel_strength": 0.673469387755102
+      }
+    }
+  ],
+  "near_misses": [
+    {
+      "ticker": "WDAY",
+      "company": "Workday, Inc.",
+      "would_be": "RIGHT_RIM",
+      "score": 79.3,
+      "rule": "left_rim_dominance",
+      "measured": "high[a] 211.83 vs prior max 227.49",
+      "threshold": "highest high of prior 60 bars",
+      "a": "2026-09-03",
+      "c": "2026-10-26",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "ROP",
+      "company": "Roper Technologies",
+      "would_be": "RIGHT_RIM",
+      "score": 75.4,
+      "rule": "rim_ratio",
+      "measured": "1.052 (high[c]/high[a])",
+      "threshold": "0.9 .. 1.05",
+      "a": "2026-09-03",
+      "c": "2026-10-26",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "MSFT",
+      "company": "Microsoft",
+      "would_be": "NEAR_PIVOT",
+      "score": 73.2,
+      "rule": "cup_depth",
+      "measured": "36.5%",
+      "threshold": "12% .. 35%",
+      "a": "2025-10-28",
+      "c": "2026-10-13",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "ADI",
+      "company": "Analog Devices",
+      "would_be": "NEAR_PIVOT",
+      "score": 72.5,
+      "rule": "handle_position",
+      "measured": "0.352 of cup depth above low[b]",
+      "threshold": ">= 0.5",
+      "a": "2026-06-22",
+      "c": "2026-10-06",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "ADBE",
+      "company": "Adobe Inc.",
+      "would_be": "RIGHT_RIM",
+      "score": 70.6,
+      "rule": "handle_position",
+      "measured": "0.421 of cup depth above low[b]",
+      "threshold": ">= 0.5",
+      "a": "2026-09-01",
+      "c": "2026-10-22",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "SHOP",
+      "company": "Shopify",
+      "would_be": "HANDLE_FORMING",
+      "score": 70.5,
+      "rule": "cup_depth",
+      "measured": "48.4%",
+      "threshold": "12% .. 35%",
+      "a": "2025-10-29",
+      "c": "2026-10-12",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "MNST",
+      "company": "Monster Beverage",
+      "would_be": "RIGHT_RIM",
+      "score": 70.2,
+      "rule": "left_rim_dominance",
+      "measured": "high[a] 49.24 vs prior max 50.17",
+      "threshold": "highest high of prior 60 bars",
+      "a": "2026-08-25",
+      "c": "2026-10-20",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "FTNT",
+      "company": "Fortinet",
+      "would_be": "RIGHT_RIM",
+      "score": 69.6,
+      "rule": "cup_length",
+      "measured": "9 bars (c - a)",
+      "threshold": "30 bars .. 325 bars",
+      "a": "2026-10-13",
+      "c": "2026-10-26",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "PYPL",
+      "company": "PayPal",
+      "would_be": "RIGHT_RIM",
+      "score": 65.7,
+      "rule": "handle_position",
+      "measured": "0.312 of cup depth above low[b]",
+      "threshold": ">= 0.5",
+      "a": "2026-08-20",
+      "c": "2026-10-21",
+      "last_bar": "2026-10-26"
+    },
+    {
+      "ticker": "GILD",
+      "company": "Gilead Sciences",
+      "would_be": "BREAKOUT",
+      "score": 64.9,
+      "rule": "u_shape",
+      "measured": "0.381 of closes in bottom 35% of depth",
+      "threshold": ">= 0.4",
+      "a": "2026-02-11",
+      "c": "2026-09-23",
+      "last_bar": "2026-10-26"
+    }
+  ],
+  "skipped": {
+    "HONA": "only 93 bars (< data.min_bars 250)",
+    "SPCX": "only 94 bars (< data.min_bars 250)"
+  }
+}
