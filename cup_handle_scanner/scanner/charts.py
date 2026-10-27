@@ -15,7 +15,10 @@ from .detector import Bars, Candidate  # noqa: E402
 
 COLOR = {"a": "#1565c0", "b": "#6a1b9a", "c": "#1565c0", "h": "#e65100", "e": "#2e7d32",
          "pivot": "#1565c0", "stop": "#c62828", "target": "#2e7d32", "curve": "#6a1b9a",
-         "handle": "#ff9800"}
+         "handle": "#ff9800", "left_rim": "#546e7a"}
+
+# Price-tag layout in the left margin: two text lines plus box padding, in units of the font size.
+TAG_LINES, TAG_LINE_SPACING, TAG_PAD = 2, 1.2, 0.3
 
 
 def _label(ax, x, y, text, color, above, fs):
@@ -25,13 +28,21 @@ def _label(ax, x, y, text, color, above, fs):
                 arrowprops=dict(arrowstyle="-|>", color=color, lw=2), zorder=6)
 
 
-def _hline(ax, y, text, color, style, fs):
-    """Horizontal level with a price tag in the left margin (the price axis is on the right)."""
-    ax.axhline(y, color=color, ls=style, lw=2, zorder=4)
-    ax.annotate(f"{text}\n{y:,.2f}", xy=(0, y), xycoords=("axes fraction", "data"),
-                xytext=(-6, 0), textcoords="offset points", ha="right", va="center",
-                color="white", fontsize=fs - 2, fontweight="bold", annotation_clip=False,
-                bbox=dict(boxstyle="round,pad=0.3", fc=color, ec="none"))
+def _price_tags(ax, tags, fs):
+    """Tags (y, text, color) in the left margin, nudged apart so none overlap."""
+    fig = ax.figure
+    size = fs - 2
+    gap_px = size * (TAG_LINES * TAG_LINE_SPACING + 2 * TAG_PAD) * fig.dpi / 72
+    ys = [ax.transData.transform((0, y))[1] for y, _, _ in tags]
+    placed, last = {}, None
+    for i in sorted(range(len(tags)), key=lambda i: -ys[i]):  # top to bottom
+        y = ys[i] if last is None else min(ys[i], last - gap_px)
+        placed[i], last = y, y
+    for i, (y, text, color) in enumerate(tags):
+        ax.annotate(text, xy=(0, y), xycoords=("axes fraction", "data"),
+                    xytext=(-6, (placed[i] - ys[i]) * 72 / fig.dpi), textcoords="offset points",
+                    ha="right", va="center", color="white", fontsize=size, fontweight="bold",
+                    annotation_clip=False, bbox=dict(boxstyle=f"round,pad={TAG_PAD}", fc=color, ec="none"))
 
 
 def caption(cand: Candidate) -> str:
@@ -42,6 +53,8 @@ def caption(cand: Candidate) -> str:
     else:
         lines.append("no handle yet")
     lines.append(f"{lv['distance_to_pivot_pct']:+.1f}% to pivot")
+    if "left_rim_overhead" in cand.flags:
+        lines.append(f"left rim {m['left_rim_overhead_pct']:+.1f}% above pivot")
     return "\n".join(lines)
 
 
@@ -80,9 +93,13 @@ def render_chart(ticker: str, df: pd.DataFrame, bars: Bars, cand: Candidate, cfg
             a_.axvspan(x(cand.handle_start) - 0.5, x(cand.handle_end) + 0.5,
                        color=COLOR["handle"], alpha=0.15, zorder=0)
 
-    _hline(ax, lv["pivot"], "pivot", COLOR["pivot"], "--", fs)
-    _hline(ax, lv["stop"], "stop", COLOR["stop"], "-.", fs)
-    _hline(ax, lv["target"], "target", COLOR["target"], ":", fs)
+    levels = [(lv["pivot"], "pivot", COLOR["pivot"], "--", 2),
+              (lv["stop"], "stop", COLOR["stop"], "-.", 2),
+              (lv["target"], "target", COLOR["target"], ":", 2)]
+    if "left_rim_overhead" in cand.flags:  # resistance above the pivot, at least flags.left_rim_overhead_min_pct
+        levels.append((float(bars.high[cand.a]), "left rim", COLOR["left_rim"], "-", 1))
+    for y, _, color, style_, lw in levels:
+        ax.axhline(y, color=color, ls=style_, lw=lw, zorder=4)
 
     _label(ax, x(cand.a), bars.high[cand.a], "a", COLOR["a"], True, fs)
     _label(ax, x(cand.b), bars.low[cand.b], "b", COLOR["b"], False, fs)
@@ -98,6 +115,7 @@ def render_chart(ticker: str, df: pd.DataFrame, bars: Bars, cand: Candidate, cfg
     pad = (hi - lo) * 0.14  # room for the a/b/c/h labels
     ax.set_ylim(lo - pad, hi + pad)
     ax.set_xlim(-1, n + 1)
+    _price_tags(ax, [(y, f"{name}\n{y:,.2f}", color) for y, name, color, _, _ in levels], fs)
 
     head = f"{ticker}  {cand.stage}  score {cand.score:.0f}"
     ax.text(0.01, 0.97, head + "\n" + caption(cand), transform=ax.transAxes, va="top", ha="left",

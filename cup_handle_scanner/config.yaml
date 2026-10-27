@@ -3,16 +3,31 @@
 # A file passed with --config is deep-merged over this one, so it only needs the keys it changes.
 
 universe:
-  # The components table moved off the Nasdaq-100 article to this list page (checked 2026-10-27).
-  url: https://en.wikipedia.org/wiki/List_of_NASDAQ-100_companies
-  fallback_urls:              # tried in order if the main URL has no usable table
-    - https://en.wikipedia.org/wiki/Nasdaq-100
+  active: sp500               # which block below to scan; --universe overrides it
   user_agent: "cup-handle-scanner/1.0 (personal research script; python-requests)"
   request_timeout_sec: 30
-  saved_file: data/universe.csv
-  min_count: 95
-  max_count: 105
-  benchmark: QQQ
+  sp500:
+    url: https://en.wikipedia.org/wiki/List_of_S%26P_500_companies
+    fallback_urls: []         # tried in order if the main URL has no usable table
+    ticker_column: Symbol
+    company_column: Security
+    sector_column: GICS Sector
+    saved_file: data/universe_sp500.csv
+    min_count: 495
+    max_count: 510
+    benchmark: SPY
+  nasdaq100:
+    # The components table moved off the Nasdaq-100 article to this list page (checked 2026-10-27).
+    url: https://en.wikipedia.org/wiki/List_of_NASDAQ-100_companies
+    fallback_urls:
+      - https://en.wikipedia.org/wiki/Nasdaq-100
+    ticker_column: Ticker
+    company_column: Company
+    sector_column: ICB Industry   # this table has ICB, not GICS, classes
+    saved_file: data/universe_nasdaq100.csv
+    min_count: 95
+    max_count: 105
+    benchmark: QQQ
 
 data:
   history_years: 3
@@ -44,8 +59,8 @@ cup:
   left_rim_dominance_days: 60
   bottom_position_min: 0.15
   bottom_position_max: 0.85
-  u_bottom_zone: 0.35
-  u_min_share_in_zone: 0.40
+  u_bottom_zone: 0.35          # calibrated (python -m scanner.calibrate): only zones ~0.33-0.40 separate
+  u_min_share_in_zone: 0.37    # every V seed (max 0.358) from every U seed and real cup (min 0.384)
   forming_min_recovery: 0.5
 
 handle:
@@ -66,27 +81,37 @@ breakout:
 levels:
   stop_lookback_days: 10
 
+flags:                        # informational only; flags never reject a candidate
+  left_rim_overhead_min_pct: 3  # flag when high[a] is at least this % above the pivot (resistance)
+
 targets:
   method: absolute            # "percent" projects the cup's % rise, as on the EID Parry chart
 
 scoring:
   weights: {u_shape: 25, symmetry: 10, depth: 10, handle: 20, volume: 15, trend: 10, rel_strength: 10}
-  u_shape_range: [0.35, 0.55]
+  u_shape_range: [0.36, 0.52]  # at zone 0.35: highest V seed -> 0, lowest half-sine seed -> 1
   symmetry_tolerance: 0.10
   depth_sweet_spot_pct: [15, 30]
   handle_sweet_spot_pct: [3, 10]
   handle_upper_zone: 0.3333   # "upper third": handle low within this top fraction of the cup
   volume_dryup_range: [0.8, 1.2]
-  sma_fast_days: 50           # trend component and QQQ context
+  sma_fast_days: 50           # trend component and benchmark context
   sma_slow_days: 200
   rs_lookback_days: 126
   rs_min_universe: 20
   no_data_value: 0.5          # component value when it cannot be measured yet (no handle, forming)
 
+calibration:                  # python -m scanner.calibrate (round-not-V rule)
+  zones: [0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40]
+  seeds: 20                   # noisy synthetic cups per shape
+  reference_file: calibration/reference_cups.csv
+
 report:
   output_dir: output
   chart_padding_days: 60
   near_misses: 10
+  max_charts: 60              # charts rendered and embedded, best first (stage priority, then score)
+  max_html_mb: 15             # warn if report.html grows beyond this
   console_top: 10
   explain_top: 20
   run_timezone: Asia/Jerusalem

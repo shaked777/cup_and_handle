@@ -1,4 +1,7 @@
-"""--as-of D on full data must give exactly the result of data physically truncated at D."""
+"""--as-of D on full data must give exactly the result of data physically truncated at D.
+
+Runs through the real cache path (parquet + meta in tmp_path); downloading fails the test.
+"""
 from __future__ import annotations
 
 import copy
@@ -7,12 +10,14 @@ from datetime import datetime, timezone
 import pandas as pd
 import pytest
 
-from conftest import make_series
+from conftest import SEEDS
 from scanner import data
 from scanner.cli import analyze
+from scanner.synthetic import make_series
 
 TICKER = "SYN"
 EXTRA = 40
+AS_OF_STEP = 3
 
 
 def _no_network(*_args, **_kwargs):
@@ -40,22 +45,22 @@ def _load(cfg, as_of):
 
 def _summary(best, cands):
     def one(c):
-        return (c.kind, c.stage, c.target_stage, c.a, c.b, c.c, c.h, c.e, round(c.score, 9),
+        return (c.kind, c.stage, c.target_stage, c.a, c.b, c.c, c.h, c.e, round(c.score, 9), tuple(c.flags),
                 tuple((r.name, r.passed, None if r.value is None else round(r.value, 9)) for r in c.rules))
     return (one(best) if best else None, [one(c) for c in cands])
 
 
-@pytest.fixture
-def full_series():
-    df, truth = make_series(tail="breakout", extra_bars=EXTRA)
+def _full_series(seed):
+    df, _ = make_series("halfsine", tail="breakout", extra_bars=EXTRA, seed=seed)
     return df, len(df) - EXTRA - 1  # index of the breakout bar
 
 
-def test_as_of_matches_truncated(cfg, tmp_path, full_series):
-    df, e = full_series
+@pytest.mark.parametrize("seed", SEEDS)
+def test_as_of_matches_truncated(cfg, tmp_path, seed):
+    df, e = _full_series(seed)
     cfg_full = _cfg_with_cache(cfg, tmp_path / "full")
     _seed_cache(cfg_full, df)
-    for i in list(range(e - 6, e + EXTRA, 3)) + [len(df) - 1]:
+    for i in list(range(e - 6, e + EXTRA, AS_OF_STEP)) + [len(df) - 1]:
         as_of = df.index[i].date()
         cfg_cut = _cfg_with_cache(cfg, tmp_path / f"cut{i}")
         _seed_cache(cfg_cut, df.iloc[: i + 1])
@@ -66,8 +71,9 @@ def test_as_of_matches_truncated(cfg, tmp_path, full_series):
         assert _summary(*analyze(a, cfg)[:2]) == _summary(*analyze(b, cfg)[:2]), f"as-of {as_of}"
 
 
-def test_future_breakout_not_seen(cfg, tmp_path, full_series):
-    df, e = full_series
+@pytest.mark.parametrize("seed", SEEDS)
+def test_future_breakout_not_seen(cfg, tmp_path, seed):
+    df, e = _full_series(seed)
     cfg_full = _cfg_with_cache(cfg, tmp_path / "full")
     _seed_cache(cfg_full, df)
     before, _, _ = analyze(_load(cfg_full, df.index[e - 1].date()), cfg)
