@@ -185,8 +185,9 @@ def slice_window(df: pd.DataFrame, window: Window) -> pd.DataFrame:
 
 
 def load_prices(tickers: list[str], cfg: dict, window: Window, refresh: bool = False,
-                downloader=yf_download, now_utc: datetime | None = None):
+                downloader=None, now_utc: datetime | None = None):
     """Return ({ticker: OHLCV frame within window}, {ticker: skip reason})."""
+    downloader = downloader or yf_download  # looked up at call time, so tests can replace it
     dcfg = cfg["data"]
     now_utc = now_utc or datetime.now(timezone.utc)
     frames, skipped, to_fetch, stale = {}, {}, [], {}

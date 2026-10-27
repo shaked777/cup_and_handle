@@ -133,10 +133,14 @@ def _left_rim_rules(s: Bars, a: int, cfg: dict) -> list[Rule]:
     return rules
 
 
+def share_in_zone(close: np.ndarray, a: int, end: int, bottom: float, depth: float, zone: float) -> float:
+    """Share of closes in a..end at or below bottom + zone * depth (the round-not-V measure)."""
+    return float(np.mean(close[a:end + 1] <= bottom + zone * depth))
+
+
 def _u_shape_rule(s: Bars, a: int, end: int, b: int, depth: float, cfg: dict) -> tuple[Rule, float]:
     cc = cfg["cup"]
-    zone = s.low[b] + cc["u_bottom_zone"] * depth
-    share = float(np.mean(s.close[a:end + 1] <= zone))
+    share = share_in_zone(s.close, a, end, s.low[b], depth, cc["u_bottom_zone"])
     return Rule("u_shape", "cup", share,
                 f"{share:.3f} of closes in bottom {cc['u_bottom_zone']:.0%} of depth",
                 f">= {cc['u_min_share_in_zone']}", share >= cc["u_min_share_in_zone"]), share
@@ -250,13 +254,19 @@ def _eval_cup(s: Bars, a: int, b: int, c: int, confirmed: bool, left: list[Rule]
             target = "HANDLE_FORMING"
     for name in req:
         by[name].required = True
+
+    # Informational: a right rim below the left rim leaves resistance at high[a] above the pivot.
+    overhead = (s.high[a] / pivot - 1) * 100
+    if overhead >= cfg["flags"]["left_rim_overhead_min_pct"]:
+        cand.flags.append("left_rim_overhead")
+
     cand.rules = rules
     cand.target_stage = target
     cand.stage = target if not cand.failed else None
     cand.m = dict(pivot=pivot, depth=depth, depth_pct=depth_pct, cup_days=cup_days, share=share,
                   rim_ratio=rim, handle_len=hlen, handle_depth_pct=hdepth, handle_pos=hpos,
                   close=close_t, dist_pct=dist_pct, volume_ratio=vr,
-                  breakout_age=None if e is None else T - e)
+                  breakout_age=None if e is None else T - e, left_rim_overhead_pct=overhead)
     return cand
 
 
@@ -308,7 +318,7 @@ def _eval_forming(s: Bars, a: int, left: list[Rule], cfg: dict) -> Candidate:
     cand.m = dict(pivot=pivot, depth=depth, depth_pct=depth_pct, cup_days=span, share=share,
                   rim_ratio=None, handle_len=0, handle_depth_pct=None, handle_pos=None,
                   close=close_t, dist_pct=(close_t / pivot - 1) * 100, volume_ratio=None,
-                  breakout_age=None, recovery=recovery)
+                  breakout_age=None, recovery=recovery, left_rim_overhead_pct=None)
     return cand
 
 
@@ -334,6 +344,17 @@ def detect(s: Bars, cfg: dict) -> list[Candidate]:
                 cands.append(_eval_cup(s, a, b, c, False, left, cfg))
         cands.append(_eval_forming(s, a, left, cfg))
     return cands
+
+
+def format_flags(c: Candidate) -> str:
+    """Flags for display; left_rim_overhead carries its percentage."""
+    out = []
+    for f in c.flags:
+        if f == "left_rim_overhead":
+            out.append(f"left_rim_overhead +{c.m['left_rim_overhead_pct']:.1f}%")
+        else:
+            out.append(f)
+    return ", ".join(out)
 
 
 def best_key(c: Candidate):
